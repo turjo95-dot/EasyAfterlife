@@ -1,0 +1,54 @@
+# EasyAfterlife Messages Configuration
+# Use & for color codes, supports all Minecraft color codes
+
+prefix: "&8[&6☠ &bEasyAfterlife&8] "
+
+# Grave Messages
+grave-created: "&aYour grave has been created! Use your grave key to reclaim your items."
+grave-unlocked: "&aGrave unlocked! Your items have been restored."
+grave-expired: "&cYour grave has expired and items were lost."
+grave-located: "&aYour grave is at &e%x%, %y%, %z% &ain world &e%world%"
+grave-not-found: "&cGrave not found or has expired."
+
+# Key Messages
+key-given: "&aYou received a grave key!"
+key-used: "&aGrave key used successfully!"
+no-key: "&cYou don't have a grave key!"
+key-cooldown: "&cYou must wait %time% seconds before retrieving a new key."
+key-retrieved: "&aSuccessfully retrieved a new grave key!"
+
+# Economy Messages
+insufficient-funds: "&cYou need $%cost% to retrieve a lost key."
+economy-withdrawn: "&7$%amount% has been withdrawn from your account."
+
+# General Messages
+no-grave: "&cYou don't have any active graves."
+no-permission: "&cYou don't have permission to use this command!"
+player-not-found: "&cPlayer '%player%' not found or offline!"
+world-disabled: "&cGraves are disabled in this world."
+grave-protected: "&cGraves are protected and cannot be broken!"
+not-your-grave: "&cThis grave doesn't belong to you!"
+
+# Admin Messages
+reload-success: "&aEasyAfterlife configuration reloaded successfully!"
+reload-failed: "&cFailed to reload configuration: %error%"
+key-given-admin: "&aSuccessfully gave grave key to %player%!"
+stats-header: "&6⚰ EasyAfterlife Statistics:"
+stats-divider: "&8━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# GUI Messages
+gui-grave-title: "&8⚰ %player%'s Grave"
+gui-restore-button: "&a&l✓ RESTORE ITEMS"
+gui-restore-lore: |
+  &7Click to restore all your items
+  &7and close this grave permanently.
+  &8
+  &c&lWARNING: This action cannot be undone!
+
+# Time Formatting
+time-format:
+  expired: "Expired"
+  seconds: "%s%ds"
+  minutes: "%m%m %s%ds" 
+  hours: "%h%h %m%m %s%ds"
+  days: "%d%d %h%h %m%m"

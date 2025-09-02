@@ -1,0 +1,69 @@
+name: EasyAfterlife
+version: 1.0.0
+main: dev.turjo.easyafterlife.EasyAfterlifePlugin
+api-version: 1.20
+author: Turjo
+description: Secure Death, Smarter Recovery - Advanced Grave System
+website: https://github.com/turjo/easyafterlife
+
+softdepend: [Vault, HolographicDisplays, PlaceholderAPI]
+
+commands:
+  grave:
+    description: Main grave command
+    usage: /grave <locate|list|retrieve>
+    permission: easyafterlife.player.use
+  graveadmin:
+    description: Admin grave commands
+    usage: /graveadmin <givekey|reload> [player]
+    permission: easyafterlife.admin.use
+
+permissions:
+  easyafterlife.*:
+    description: Full access to EasyAfterlife
+    children:
+      easyafterlife.player.*: true
+      easyafterlife.admin.*: true
+  
+  easyafterlife.player.*:
+    description: All player permissions
+    children:
+      easyafterlife.player.use: true
+      easyafterlife.player.locate: true
+      easyafterlife.player.list: true
+      easyafterlife.player.retrieve: true
+  
+  easyafterlife.player.use:
+    description: Use basic grave commands
+    default: true
+  
+  easyafterlife.player.locate:
+    description: Locate your graves
+    default: true
+  
+  easyafterlife.player.list:
+    description: List your graves
+    default: true
+  
+  easyafterlife.player.retrieve:
+    description: Retrieve lost keys
+    default: true
+  
+  easyafterlife.admin.*:
+    description: All admin permissions
+    children:
+      easyafterlife.admin.use: true
+      easyafterlife.admin.givekey: true
+      easyafterlife.admin.reload: true
+  
+  easyafterlife.admin.use:
+    description: Use admin commands
+    default: op
+  
+  easyafterlife.admin.givekey:
+    description: Give grave keys to players
+    default: op
+  
+  easyafterlife.admin.reload:
+    description: Reload plugin configuration
+    default: op

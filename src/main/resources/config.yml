@@ -1,0 +1,110 @@
+# EasyAfterlife Configuration
+# Secure Death, Smarter Recovery
+
+grave:
+  # Time in seconds before grave despawns (1800 = 30 minutes)
+  lifetime: 1800
+  
+  # Move grave to safe location if death occurs in lava/void
+  safeRelocation: true
+  
+  # Overwrite old grave when player dies again before reclaiming
+  overwrite: true
+  
+  # Store player XP in grave
+  store-xp: true
+  
+  # Search radius for safe relocation (blocks)
+  safeRadius: 10
+  
+  # Maximum graves per player
+  maxGravesPerPlayer: 3
+
+keys:
+  # Enable grave key system
+  enabled: true
+  
+  # Allow players to retrieve lost keys
+  lostKeyRetrieve: true
+  
+  # Cooldown before player can retrieve a new key (seconds)
+  retrieveCooldown: 300
+  
+  # Economy cost to retrieve lost key (requires Vault)
+  retrieveCost: 50
+  
+  # Give key on death
+  giveOnDeath: true
+
+pvp:
+  # Allow other players to raid graves if they have the key
+  allowRaiding: false
+  
+  # Percentage chance items drop normally instead of grave (0-100)
+  corpseLootChance: 0
+  
+  # Allow grave breaking in PvP worlds
+  allowGraveBreaking: false
+
+visuals:
+  # Enable holograms above graves (requires HolographicDisplays)
+  hologram: true
+  
+  # Hologram text (%player% = player name, %time% = time left)
+  hologram-text: "☠ Here lies %player%'s grave"
+  
+  # Chest type for graves (CHEST, BARREL, SHULKER_BOX)
+  chest-type: "CHEST"
+  
+  # Particle effects around grave
+  particles: true
+  
+  # Particle type
+  particleType: "SOUL"
+
+sounds:
+  # Enable sound effects
+  enabled: true
+  
+  # Sound when grave spawns
+  graveSpawn: "BLOCK_BELL_USE"
+  
+  # Sound when grave is unlocked
+  graveUnlock: "BLOCK_CHEST_OPEN"
+  
+  # Sound when key is used
+  keyUse: "ITEM_TOTEM_USE"
+
+worlds:
+  # Worlds where graves are disabled
+  disabled-worlds:
+    - "minigames"
+    - "lobby"
+  
+  # Only enable in specific worlds (leave empty to enable in all)
+  enabled-worlds: []
+
+database:
+  # Database type (SQLITE, MYSQL)
+  type: "SQLITE"
+  
+  # MySQL settings (only if type is MYSQL)
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "easyafterlife"
+    username: "root"
+    password: "password"
+
+messages:
+  prefix: "&8[&6☠ &bEasyAfterlife&8] "
+  grave-created: "&aYour grave has been created! Use your grave key to reclaim your items."
+  grave-unlocked: "&aGrave unlocked! Your items have been restored."
+  key-given: "&aYou received a grave key!"
+  grave-expired: "&cYour grave has expired and items were lost."
+  no-grave: "&cYou don't have any active graves."
+  no-key: "&cYou don't have a grave key!"
+  key-cooldown: "&cYou must wait %time% seconds before retrieving a new key."
+  insufficient-funds: "&cYou need $%cost% to retrieve a lost key."
+  grave-located: "&aYour grave is at &e%x%, %y%, %z% &ain world &e%world%"
+  reload-success: "&aEasyAfterlife configuration reloaded successfully!"

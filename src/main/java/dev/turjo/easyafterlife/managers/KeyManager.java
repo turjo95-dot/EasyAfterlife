@@ -4,6 +4,7 @@ import dev.turjo.easyafterlife.EasyAfterlifePlugin;
 import dev.turjo.easyafterlife.models.Grave;
 import dev.turjo.easyafterlife.models.GraveKey;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

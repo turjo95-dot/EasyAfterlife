@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public class PlayerInteractListener implements Listener {
     
     private final EasyAfterlifePlugin plugin;

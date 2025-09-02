@@ -67,7 +67,8 @@ public class HologramManager {
         
         // Update time left
         if (hologram.getLines().size() >= 3) {
-            hologram.getLines().set(2, "§8Time left: §c" + grave.getFormattedTimeLeft());
+            hologram.getLines().remove(2);
+            hologram.getLines().insertText(2, "§8Time left: §c" + grave.getFormattedTimeLeft());
         }
     }
     

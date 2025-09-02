@@ -1,5 +1,6 @@
 package dev.turjo.easyafterlife.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -86,7 +87,7 @@ public class LocationUtils {
         return type.isAir() || 
                type == Material.WATER || 
                type == Material.TALL_GRASS || 
-               type == Material.GRASS ||
+               type == Material.SHORT_GRASS ||
                !type.isSolid();
     }
     

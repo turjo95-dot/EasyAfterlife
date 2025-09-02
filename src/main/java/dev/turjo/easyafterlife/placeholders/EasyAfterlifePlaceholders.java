@@ -3,6 +3,7 @@ package dev.turjo.easyafterlife.placeholders;
 import dev.turjo.easyafterlife.EasyAfterlifePlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class EasyAfterlifePlaceholders extends PlaceholderExpansion {
     
@@ -13,17 +14,17 @@ public class EasyAfterlifePlaceholders extends PlaceholderExpansion {
     }
     
     @Override
-    public String getIdentifier() {
+    public @NotNull String getIdentifier() {
         return "easyafterlife";
     }
     
     @Override
-    public String getAuthor() {
+    public @NotNull String getAuthor() {
         return plugin.getDescription().getAuthors().toString();
     }
     
     @Override
-    public String getVersion() {
+    public @NotNull String getVersion() {
         return plugin.getDescription().getVersion();
     }
     
@@ -33,7 +34,7 @@ public class EasyAfterlifePlaceholders extends PlaceholderExpansion {
     }
     
     @Override
-    public String onPlaceholderRequest(Player player, String params) {
+    public String onPlaceholderRequest(Player player, @NotNull String params) {
         if (player == null) {
             return "";
         }

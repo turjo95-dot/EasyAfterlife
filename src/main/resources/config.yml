@@ -47,7 +47,7 @@ pvp:
   allowGraveBreaking: false
 
 visuals:
-  # Enable holograms above graves (requires HolographicDisplays)
+  # Enable holograms above graves (requires DecentHolograms)
   hologram: true
   
   # Hologram text (%player% = player name, %time% = time left)

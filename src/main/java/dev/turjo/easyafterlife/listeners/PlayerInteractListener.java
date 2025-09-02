@@ -105,8 +105,28 @@ public class PlayerInteractListener implements Listener {
             return;
         }
         
-        // Open grave GUI
-        new GraveGUI(plugin, player, grave).open();
+        // Allow access to the chest directly
+        if (block.getState() instanceof org.bukkit.block.Chest chest) {
+            // Remove the grave key from player's inventory
+            plugin.getKeyManager().removeGraveKey(player, grave.getGraveId());
+            
+            // Restore experience
+            if (plugin.getConfigManager().shouldStoreXP() && grave.getExperience() > 0) {
+                player.giveExp(grave.getExperience());
+            }
+            
+            // Remove grave after successful access
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+                plugin.getGraveManager().removeGraveAfterAccess(grave);
+            }, 1L);
+            
+            // Play sound
+            if (plugin.getConfigManager().areSoundsEnabled()) {
+                player.playSound(player.getLocation(), plugin.getConfigManager().getGraveUnlockSound(), 1.0f, 1.0f);
+            }
+            
+            player.sendMessage(plugin.getConfigManager().getMessage("grave-unlocked"));
+        }
     }
     
     private boolean isGraveChest(Block block) {

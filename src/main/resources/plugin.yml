@@ -6,7 +6,7 @@ author: Turjo
 description: Secure Death, Smarter Recovery - Advanced Grave System
 website: https://github.com/turjo/easyafterlife
 
-softdepend: [Vault, HolographicDisplays, PlaceholderAPI]
+softdepend: [Vault, DecentHolograms, PlaceholderAPI]
 
 commands:
   grave:

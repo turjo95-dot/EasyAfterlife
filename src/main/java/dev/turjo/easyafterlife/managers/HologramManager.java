@@ -2,8 +2,8 @@ package dev.turjo.easyafterlife.managers;
 
 import dev.turjo.easyafterlife.EasyAfterlifePlugin;
 import dev.turjo.easyafterlife.models.Grave;
-import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
-import me.filoghost.holographicdisplays.api.hologram.Hologram;
+import eu.decentsoftware.holograms.api.DHAPI;
+import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Location;
 
 import java.util.HashMap;
@@ -14,35 +14,38 @@ public class HologramManager {
     
     private final EasyAfterlifePlugin plugin;
     private final Map<UUID, Hologram> graveHolograms;
-    private HolographicDisplaysAPI hologramAPI;
+    private boolean decentHologramsAvailable;
     
     public HologramManager(EasyAfterlifePlugin plugin) {
         this.plugin = plugin;
         this.graveHolograms = new HashMap<>();
         
-        // Initialize HolographicDisplays API if available
-        if (plugin.getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
-            this.hologramAPI = HolographicDisplaysAPI.get(plugin);
+        // Check if DecentHolograms is available
+        this.decentHologramsAvailable = plugin.getServer().getPluginManager().getPlugin("DecentHolograms") != null;
+        
+        if (decentHologramsAvailable) {
+            plugin.getLogger().info("✅ DecentHolograms integration enabled!");
         }
     }
     
     public void createGraveHologram(Grave grave) {
-        if (hologramAPI == null || !plugin.getConfigManager().areHologramsEnabled()) {
+        if (!decentHologramsAvailable || !plugin.getConfigManager().areHologramsEnabled()) {
             return;
         }
         
         Location hologramLocation = grave.getLocation().clone().add(0.5, 2.0, 0.5);
-        
-        Hologram hologram = hologramAPI.createHologram(hologramLocation);
+        String hologramName = "grave_" + grave.getGraveId().toString().replace("-", "");
         
         // Get hologram text and replace placeholders
         String text = plugin.getConfigManager().getHologramText()
             .replace("%player%", grave.getPlayerName())
             .replace("%time%", grave.getFormattedTimeLeft());
         
-        hologram.getLines().appendText("§6⚰ §8[§bEasyAfterlife§8]");
-        hologram.getLines().appendText("§7" + text);
-        hologram.getLines().appendText("§8Time left: §c" + grave.getFormattedTimeLeft());
+        // Create hologram with multiple lines
+        Hologram hologram = DHAPI.createHologram(hologramName, hologramLocation);
+        DHAPI.addHologramLine(hologram, "§6⚰ §8[§bEasyAfterlife§8]");
+        DHAPI.addHologramLine(hologram, "§7" + text);
+        DHAPI.addHologramLine(hologram, "§8Time left: §c" + grave.getFormattedTimeLeft());
         
         graveHolograms.put(grave.getGraveId(), hologram);
         
@@ -53,7 +56,7 @@ public class HologramManager {
     public void removeGraveHologram(UUID graveId) {
         Hologram hologram = graveHolograms.remove(graveId);
         if (hologram != null) {
-            hologram.delete();
+            DHAPI.removeHologram(hologram.getName());
         }
     }
     
@@ -65,11 +68,8 @@ public class HologramManager {
             return;
         }
         
-        // Update time left
-        if (hologram.getLines().size() >= 3) {
-            hologram.getLines().remove(2);
-            hologram.getLines().insertText(2, "§8Time left: §c" + grave.getFormattedTimeLeft());
-        }
+        // Update time left line
+        DHAPI.setHologramLine(hologram, 2, "§8Time left: §c" + grave.getFormattedTimeLeft());
     }
     
     private void startHologramUpdateTask(UUID graveId) {
@@ -85,9 +85,9 @@ public class HologramManager {
     }
     
     public void cleanup() {
-        if (hologramAPI != null) {
+        if (decentHologramsAvailable) {
             for (Hologram hologram : graveHolograms.values()) {
-                hologram.delete();
+                DHAPI.removeHologram(hologram.getName());
             }
             graveHolograms.clear();
         }

@@ -79,6 +79,9 @@ public class GraveManager {
         // Place physical grave
         placeGraveChest(graveLocation);
         
+        // Store items in the chest
+        storeItemsInChest(graveLocation, grave);
+        
         // Create hologram
         if (plugin.getConfigManager().areHologramsEnabled()) {
             plugin.getHologramManager().createGraveHologram(grave);
@@ -134,6 +137,10 @@ public class GraveManager {
         return true;
     }
     
+    public void removeGraveAfterAccess(Grave grave) {
+        removeGrave(grave);
+    }
+    
     private void restorePlayerInventory(Player player, Grave grave) {
         // Clear current inventory
         player.getInventory().clear();
@@ -158,6 +165,40 @@ public class GraveManager {
             chest.setCustomName("§8[§6⚰§8] §7Grave Chest");
             chest.update();
         }
+    }
+    
+    private void storeItemsInChest(Location location, Grave grave) {
+        Block block = location.getBlock();
+        if (!(block.getState() instanceof Chest chest)) {
+            return;
+        }
+        
+        Inventory chestInventory = chest.getInventory();
+        chestInventory.clear();
+        
+        // Store main inventory items
+        ItemStack[] graveInventory = grave.getInventory();
+        for (int i = 0; i < graveInventory.length && i < chestInventory.getSize(); i++) {
+            if (graveInventory[i] != null) {
+                chestInventory.setItem(i, graveInventory[i]);
+            }
+        }
+        
+        // Store armor in remaining slots
+        ItemStack[] armor = grave.getArmor();
+        int slot = graveInventory.length;
+        for (ItemStack armorPiece : armor) {
+            if (armorPiece != null && slot < chestInventory.getSize()) {
+                chestInventory.setItem(slot++, armorPiece);
+            }
+        }
+        
+        // Store offhand
+        if (grave.getOffhand() != null && slot < chestInventory.getSize()) {
+            chestInventory.setItem(slot, grave.getOffhand());
+        }
+        
+        chest.update();
     }
     
     private void removeGrave(Grave grave) {
@@ -278,6 +319,9 @@ public class GraveManager {
             
             // Place physical grave
             placeGraveChest(grave.getLocation());
+            
+            // Store items in the chest
+            storeItemsInChest(grave.getLocation(), grave);
             
             // Create hologram
             if (plugin.getConfigManager().areHologramsEnabled()) {

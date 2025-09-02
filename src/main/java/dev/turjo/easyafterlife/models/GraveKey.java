@@ -2,8 +2,10 @@ package dev.turjo.easyafterlife.models;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,8 @@ public class GraveKey {
     
     public static final String KEY_NAME_PREFIX = "✦ Grave Key of ";
     public static final String KEY_NAME_SUFFIX = " ✦";
-    public static final String NBT_KEY = "EASYAFTERLIFE_GRAVE_KEY";
+    public static final NamespacedKey GRAVE_ID_KEY = new NamespacedKey("easyafterlife", "grave_id");
+    public static final NamespacedKey PLAYER_ID_KEY = new NamespacedKey("easyafterlife", "player_id");
     
     private final UUID graveId;
     private final UUID playerId;
@@ -57,6 +60,10 @@ public class GraveKey {
             // Add custom model data for resource pack support
             meta.setCustomModelData(12345);
             
+            // Store grave ID and player ID in persistent data
+            meta.getPersistentDataContainer().set(GRAVE_ID_KEY, PersistentDataType.STRING, graveId.toString());
+            meta.getPersistentDataContainer().set(PLAYER_ID_KEY, PersistentDataType.STRING, playerId.toString());
+            
             key.setItemMeta(meta);
         }
         
@@ -83,16 +90,16 @@ public class GraveKey {
         }
         
         ItemMeta meta = key.getItemMeta();
-        if (meta == null || !meta.hasLore()) {
+        if (meta == null) {
             return null;
         }
         
-        for (String line : meta.getLore()) {
-            if (line.contains("Grave ID:")) {
-                String idPart = line.split("§7")[1].split("\\.")[0];
-                // This is a simplified approach - in a real implementation,
-                // you'd store the full UUID in NBT data
-                return null; // Placeholder for proper NBT implementation
+        String graveIdString = meta.getPersistentDataContainer().get(GRAVE_ID_KEY, PersistentDataType.STRING);
+        if (graveIdString != null) {
+            try {
+                return UUID.fromString(graveIdString);
+            } catch (IllegalArgumentException e) {
+                return null;
             }
         }
         

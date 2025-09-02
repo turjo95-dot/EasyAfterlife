@@ -1,6 +1,6 @@
 # ⚰️ EasyAfterlife - Secure Death, Smarter Recovery
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.3.2-blue)
 ![Minecraft](https://img.shields.io/badge/minecraft-1.20.4-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -23,7 +23,7 @@
 ## 🚀 Installation
 
 1. Download the latest release from [Releases](https://github.com/turjo/easyafterlife/releases)
-2. Place `EasyAfterlife-1.0.0.jar` in your server's `plugins` folder
+2. Place `EasyAfterlife-1.3.2.jar` in your server's `plugins` folder
 3. Restart your server
 4. Configure the plugin in `plugins/EasyAfterlife/config.yml`
 5. Reload with `/graveadmin reload`

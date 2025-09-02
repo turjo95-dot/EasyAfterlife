@@ -6,7 +6,7 @@
 
     <groupId>dev.turjo</groupId>
     <artifactId>easyafterlife</artifactId>
-    <version>1.0.0</version>
+    <version>1.3.2</version>
     <packaging>jar</packaging>
 
     <name>EasyAfterlife</name>
@@ -25,10 +25,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <!-- HolographicDisplays -->
+        <!-- CodeMC (for DecentHolograms) -->
         <repository>
-            <id>decent-holograms</id>
-            <url>https://repo.decentholograms.eu/repository/maven-public/</url>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
         </repository>
         <!-- Vault -->
         <repository>
@@ -59,11 +59,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- HolographicDisplays API -->
+        <!-- DecentHolograms API -->
         <dependency>
-            <groupId>com.github.decentsoftware-eu</groupId>
+            <groupId>eu.decentsoftware</groupId>
             <artifactId>decentholograms</artifactId>
-            <version>2.8.6</version>
+            <version>2.8.11</version>
             <scope>provided</scope>
         </dependency>
 
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.5</version>
+            <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
